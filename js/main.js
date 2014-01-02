@@ -43,7 +43,8 @@
 
 			$('.sort-row').click(function(){
 				$(this).parent().parent().find('.start').click();
-			})
+			});
+			
 		},
 		initializeFlows : function() {
 			var self = this;
