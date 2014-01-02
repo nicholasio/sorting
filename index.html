@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Simulação de execução de algoritmos de ordenação</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Sorting Algorithms Simulation</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Sorting Simulation</h1>
+        <p>Just click on <em>start</em> to start executing any algorithm, or you can click on <em>execute all</em> to wacth all of they execute simutaniously</p>
+        <p><a class="btn btn-primary btn-lg all" role="button">Execute All</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <table class="table table-condesed">
+          <tr>
+            <th></th>
+            <th> 
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"> </i> Insertion</a>
+            </th>
+            <th> 
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"> </i> Selection</a>
+            </th>
+            <th> 
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Bubble</a>
+            </th>
+            <th> 
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Merge</a>
+            </th>
+            <th> 
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Quick</a>
+            </th>
+            <th> 
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Heap</a>
+            </th>
+            <th> 
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"> </i> Shell</a>
+            </th>
+            <th>
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Counting</a>
+            </th>
+            <th>
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Radix</a>
+            </th>
+            
+          </tr>
+          <tr>
+            <td> <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Random</a> </td>
+            <td class="algorithm-flow" data-maximum-value="100" data-algorithm-name="insertion">
+                <ul>
+                  <li  data-value="90" ><span></span></li>
+                  <li  data-value="50" ><span></span></li>
+                  <li  data-value="40" ><span></span></li>
+                  <li  data-value="43" ><span></span></li>
+                  <li  data-value="85" ><span></span></li>
+                  <li  data-value="53" ><span></span></li>
+                  <li  data-value="12" ><span></span></li>
+                  <li  data-value="46" ><span></span></li>
+                  <li  data-value="54" ><span></span></li>
+                  <li  data-value="20" ><span></span></li>
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow" data-maximum-value="100" data-algorithm-name="selection">
+                <ul>
+                  <li  data-value="90" ><span></span></li>
+                  <li  data-value="50" ><span></span></li>
+                  <li  data-value="40" ><span></span></li>
+                  <li  data-value="43" ><span></span></li>
+                  <li  data-value="85" ><span></span></li>
+                  <li  data-value="53" ><span></span></li>
+                  <li  data-value="12" ><span></span></li>
+                  <li  data-value="46" ><span></span></li>
+                  <li  data-value="54" ><span></span></li>
+                  <li  data-value="20" ><span></span></li>
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow" data-maximum-value="100" data-algorithm-name="bubble">
+                <ul>
+                  <li  data-value="90" ><span></span></li>
+                  <li  data-value="50" ><span></span></li>
+                  <li  data-value="40" ><span></span></li>
+                  <li  data-value="43" ><span></span></li>
+                  <li  data-value="85" ><span></span></li>
+                  <li  data-value="53" ><span></span></li>
+                  <li  data-value="12" ><span></span></li>
+                  <li  data-value="46" ><span></span></li>
+                  <li  data-value="54" ><span></span></li>
+                  <li  data-value="20" ><span></span></li>
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow" data-maximum-value="100" data-algorithm-name="merge">
+                <ul>
+                  <li  data-value="90" ><span></span></li>
+                  <li  data-value="50" ><span></span></li>
+                  <li  data-value="40" ><span></span></li>
+                  <li  data-value="43" ><span></span></li>
+                  <li  data-value="85" ><span></span></li>
+                  <li  data-value="53" ><span></span></li>
+                  <li  data-value="12" ><span></span></li>
+                  <li  data-value="46" ><span></span></li>
+                  <li  data-value="54" ><span></span></li>
+                  <li  data-value="20" ><span></span></li>
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+          </tr>
+
+        </table>
+
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; <img width="16px" src="img/brazil_flag.png" /> Nícholas André - 2014 </p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="js/sort.js"></script>
+    <script src="js/animate.js"></script>
+    <script src="js/main.js"></script>
+
+  </body>
+</html>

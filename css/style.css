@@ -1,0 +1,43 @@
+.algorithm-flow{
+	/*height: 300px;*/
+	border: 1px dashed #CCC;
+	text-align: center;
+	width: 100px;
+}
+
+.algorithm-flow ul {
+	/*background: blue;*/
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	float:left;
+	width: 100%;
+}
+
+.algorithm-flow ul li {
+	margin: 2px 0 2px 0;
+	width: 100%;
+	float:left;
+	position: relative;
+	clear:left;
+}
+
+.algorithm-flow ul li span { 
+	height:3px;
+	display: block;
+	background: #888;
+	margin-left: 10px;
+}
+
+.algorithm-flow ul li.current:before{
+	content: "\25BA  ";
+	font-size: 10px;
+	position: absolute;
+	top: -5px;
+	left: 0;
+	color: red;
+}
+
+table tr th { text-align: center; }
+.algorithm-flow a { float:left; clear:left; margin-left: 20%; margin-top: 10px; }
+
