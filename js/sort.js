@@ -3,6 +3,7 @@
 	window.Sort = Sort =  function(arr) {
 		this.arr = arr;
 		this.arrSwaps = [];
+		this.arrValues = [];
 	};
 
 	/*
@@ -18,6 +19,27 @@
 
 	Sort.prototype.getArr = function() {
 		return this.arr;
+	}
+	/*
+		Para algoritmos de divisão e conquista
+	*/
+	Sort.prototype.setValue = function( pos, value ) {
+		this.arrValues.push( { 'pos' : pos, 'value' : value } );
+	}
+
+	Sort.prototype.getValues = function() {
+		return this.arrValues;
+	}
+
+	Sort.prototype.get = function(typeAnimation) {
+		switch(typeAnimation) {
+			case 'swaps' : 
+				return this.getSwaps();
+				break;
+			case 'conquest' : 
+				return this.getValues();
+				break;
+		}
 	}
 	/*
 		Realiza a troca
@@ -44,6 +66,8 @@
 		}
 		this.setSwap(0, 0, true); //Marcando o primeiro
 
+		return 'swaps';
+
 	}
 
 	Sort.prototype.insertion = function() {
@@ -58,6 +82,8 @@
 		    	j--;
 		    }
 		}
+
+		return 'swaps';
 	}
 
 	Sort.prototype.selection = function() {
@@ -72,6 +98,8 @@
 			this.swap(min,i);
 			this.setSwap(i,i,true);
 		}
+
+		return 'swaps';
 	}
 
 	/* MergeSort */
@@ -93,9 +121,8 @@
 		}
 
 		for (i = p; i < r; i++ ) {
-			this.setSwap(i, p, false, false);
 			this.arr[i] = w[i-p];
-			console.log(this.arr[i-p] + " " + this.arr[ p ]);
+			this.setValue(i, w[i-p]);
 		}
 	}
 
@@ -111,8 +138,87 @@
 
 	Sort.prototype.merge = function() {
 		this.mergeSort(0, this.arr.length);
+
+		return 'conquest';
 	}	
 
+	/*
+		Implementação QuickSort
+	*/
+	Sort.prototype.separa = function(p, r){
+		var c,j,k;
+		c = this.arr[r]; j = p;
+		for( k = p; k < r; k++ ) {
+			if ( this.arr[k] <= c ){
+				this.swap(j,k);
+				this.setSwap(j,k);
+				j++;
+			}
+		}
+		this.setSwap(r,j,true);
+		this.swap(r,j,true);
 
+		return j;
+
+	}
+
+	Sort.prototype.quick = function() {
+		this.quickSort(0, this.arr.length - 1);
+
+		return 'swaps';
+	}
+
+	Sort.prototype.quickSort = function(p, r) {
+		var j;
+		if ( p < r ) {
+			j = this.separa(p, r);
+
+			this.quickSort(p,j-1);
+			this.quickSort(j+1,r);
+		}
+	}
+
+
+	/*
+		Implementação HeapSort
+	*/
+	Sort.prototype._descer = function(pai, n) {
+	    var filho = 2*pai + 1;
+
+	    if (filho < n) {
+	        if (filho < n - 1)
+	            if( this.arr[filho + 1] > this.arr[filho] ) //se o filho direito é maior
+	                filho++;
+	        if (this.arr[pai] < this.arr[filho] ) { // trocar pai com seu menor filho
+	            this.swap(pai, filho);
+	            this.setSwap(filho,pai, true);
+	            this._descer(filho, n);
+	        }
+	    }
+	}
+
+	Sort.prototype._arranjar = function(n) {
+	    for( var i = parseInt( (n-1)/2 ); i >= 0; i--) {
+	        this._descer(i, n);
+	    }
+	}
+
+	Sort.prototype.heapSort = function(n){
+	    this._arranjar(n); //Cria uma heap binária
+
+	    var m = n-1;
+	    while(m > 0) {
+	    	this.swap(0,m);
+	    	this.setSwap(0,m, true);
+	        this._descer( 0, m);
+	        --m;
+	    }
+	}
+
+	Sort.prototype.heap = function() {
+		this.heapSort(this.arr.length);
+
+		return 'swaps';
+	}
 
 })();

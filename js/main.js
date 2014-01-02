@@ -5,7 +5,7 @@
 	var SortingFlow = {
 		$algorithmFlow : $('.algorithm-flow'),
 
-		arrValues : { 'bubble' : [], 'insertion' : [], 'selection' : [], 'merge' : [] },
+		arrValues : { 'bubble' : [], 'insertion' : [], 'selection' : [], 'merge' : [] , 'quick' : [], 'heap' : [] },
 
 		init : function () {
 			var self = this;
@@ -20,11 +20,11 @@
 
 				var sort = new Sort(self.arrValues[algorithmName]); // self.arrValues.method
 
-				sort[algorithmName](); //equivalente a sort.method();
+				var typeAnimation = sort[algorithmName](); //equivalente a sort.method();
 
-				console.log(sort.getArr());
-				var swaps = sort.getSwaps();
-				var Anim = new Animate($this.parent() , swaps);
+				var steps = sort.get(typeAnimation);
+
+				var Anim = new Animate($this.parent() , steps, typeAnimation);
 
 				Anim.start(function(){
 					$this.removeClass('btn-success').addClass('btn-primary');
@@ -34,6 +34,19 @@
 				return false;
 			});
 
+			this.initializeFlows();
+			
+			$('.all').click(function() {
+				$('.start').click();
+				return false;
+			});
+
+			$('.sort-row').click(function(){
+				$(this).parent().parent().find('.start').click();
+			})
+		},
+		initializeFlows : function() {
+			var self = this;
 			$.each(this.$algorithmFlow, function(index){
 				var $this = $(this);
 				var maximumValue = $this.data('maximum-value');
@@ -60,10 +73,6 @@
 				
 			});
 
-			$('.all').click(function() {
-				$('.start').click();
-				return false;
-			});
 		}
 
 	};
