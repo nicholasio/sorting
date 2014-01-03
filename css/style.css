@@ -2,7 +2,7 @@
 	/*height: 300px;*/
 	border: 1px dashed #CCC;
 	text-align: center;
-	width: 100px;
+	width: 120px;
 }
 
 .algorithm-flow ul {
@@ -11,7 +11,7 @@
 	margin: 0;
 	padding: 0;
 	float:left;
-	width: 100%;
+	width:100px;
 }
 
 .algorithm-flow ul li {
@@ -41,3 +41,4 @@
 table tr th { text-align: center; }
 .algorithm-flow a { float:left; clear:left; margin-left: 20%; margin-top: 10px; }
 
+.reset-row{ }

@@ -9,10 +9,7 @@
 
     <title>Simulação de execução de algoritmos de ordenação</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
 
 
@@ -39,7 +36,10 @@
       <div class="container">
         <h1>Sorting Simulation</h1>
         <p>Just click on <em>start</em> to start executing any algorithm, or you can click on <em>execute all</em> to wacth all of they execute simutaniously</p>
-        <p><a class="btn btn-primary btn-lg all" role="button">Execute All</a></p>
+        <p>
+          <a class="btn btn-primary btn-lg all" role="button">Execute All</a> 
+          <a class="btn btn-warning reset-row  btn-lg"><i class="glyphicon glyphicon-repeat"></i> Reset</a>
+        </p>
       </div>
     </div>
 
@@ -59,16 +59,16 @@
               <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Bubble</a>
             </th>
             <th> 
-              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Merge</a>
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i>Merge</a>
             </th>
             <th> 
-              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Quick</a>
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i>Quick</a>
             </th>
             <th> 
-              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Heap</a>
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i>Heap</a>
             </th>
             <th> 
-              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"> </i> Shell</a>
+              <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"> </i>Shell</a>
             </th>
             <th>
               <a class="btn btn-info"><i class="glyphicon glyphicon-repeat"></i> Counting</a>
@@ -78,100 +78,194 @@
             </th>
             
           </tr>
-          <tr>
-            <td> <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Random</a> </td>
-            <td class="algorithm-flow" data-maximum-value="100" data-algorithm-name="insertion">
+          <tr id="random" >
+            <td> 
+              <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Random</a> 
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="insertion">
                 <ul>
-                  <li  data-value="90" ><span></span></li>
-                  <li  data-value="50" ><span></span></li>
-                  <li  data-value="40" ><span></span></li>
-                  <li  data-value="43" ><span></span></li>
-                  <li  data-value="85" ><span></span></li>
-                  <li  data-value="53" ><span></span></li>
-                  <li  data-value="12" ><span></span></li>
-                  <li  data-value="46" ><span></span></li>
-                  <li  data-value="54" ><span></span></li>
-                  <li  data-value="20" ><span></span></li>
+
                 </ul>
                 <a class="start btn btn-primary" href="#">Start!</a>
             </td>
-            <td class="algorithm-flow" data-maximum-value="100" data-algorithm-name="selection">
+            <td class="algorithm-flow"  data-algorithm-name="selection">
                 <ul>
-                  <li  data-value="90" ><span></span></li>
-                  <li  data-value="50" ><span></span></li>
-                  <li  data-value="40" ><span></span></li>
-                  <li  data-value="43" ><span></span></li>
-                  <li  data-value="85" ><span></span></li>
-                  <li  data-value="53" ><span></span></li>
-                  <li  data-value="12" ><span></span></li>
-                  <li  data-value="46" ><span></span></li>
-                  <li  data-value="54" ><span></span></li>
-                  <li  data-value="20" ><span></span></li>
+
                 </ul>
                 <a class="start btn btn-primary" href="#">Start!</a>
             </td>
-            <td class="algorithm-flow" data-maximum-value="100" data-algorithm-name="bubble">
+            <td class="algorithm-flow"  data-algorithm-name="bubble">
                 <ul>
-                  <li  data-value="90" ><span></span></li>
-                  <li  data-value="50" ><span></span></li>
-                  <li  data-value="40" ><span></span></li>
-                  <li  data-value="43" ><span></span></li>
-                  <li  data-value="85" ><span></span></li>
-                  <li  data-value="53" ><span></span></li>
-                  <li  data-value="12" ><span></span></li>
-                  <li  data-value="46" ><span></span></li>
-                  <li  data-value="54" ><span></span></li>
-                  <li  data-value="20" ><span></span></li>
+
                 </ul>
 
                 <a class="start btn btn-primary" href="#">Start!</a>
             </td>
-            <td class="algorithm-flow" data-maximum-value="100" data-algorithm-name="merge">
+            <td class="algorithm-flow"  data-algorithm-name="merge">
                 <ul>
-                  <li  data-value="90" ><span></span></li>
-                  <li  data-value="50" ><span></span></li>
-                  <li  data-value="40" ><span></span></li>
-                  <li  data-value="43" ><span></span></li>
-                  <li  data-value="85" ><span></span></li>
-                  <li  data-value="53" ><span></span></li>
-                  <li  data-value="12" ><span></span></li>
-                  <li  data-value="46" ><span></span></li>
-                  <li  data-value="54" ><span></span></li>
-                  <li  data-value="20" ><span></span></li>
+
                 </ul>
 
                 <a class="start btn btn-primary" href="#">Start!</a>
             </td>
-            <td class="algorithm-flow" data-maximum-value="100" data-algorithm-name="quick">
+            <td class="algorithm-flow"  data-algorithm-name="quick">
                 <ul>
-                  <li  data-value="90" ><span></span></li>
-                  <li  data-value="50" ><span></span></li>
-                  <li  data-value="40" ><span></span></li>
-                  <li  data-value="43" ><span></span></li>
-                  <li  data-value="85" ><span></span></li>
-                  <li  data-value="53" ><span></span></li>
-                  <li  data-value="12" ><span></span></li>
-                  <li  data-value="46" ><span></span></li>
-                  <li  data-value="54" ><span></span></li>
-                  <li  data-value="20" ><span></span></li>
+
                 </ul>
 
                 <a class="start btn btn-primary" href="#">Start!</a>
             </td>
-            <td class="algorithm-flow" data-maximum-value="100" data-algorithm-name="heap">
+            <td class="algorithm-flow" data-algorithm-name="heap">
                 <ul>
-                  <li  data-value="90" ><span></span></li>
-                  <li  data-value="50" ><span></span></li>
-                  <li  data-value="40" ><span></span></li>
-                  <li  data-value="43" ><span></span></li>
-                  <li  data-value="85" ><span></span></li>
-                  <li  data-value="53" ><span></span></li>
-                  <li  data-value="12" ><span></span></li>
-                  <li  data-value="46" ><span></span></li>
-                  <li  data-value="54" ><span></span></li>
-                  <li  data-value="20" ><span></span></li>
                 </ul>
 
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="shell">
+                <ul>
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+          </tr>
+
+          <tr id="nearly-sorted" >
+            <td> <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Nearly Sorted </a> </td>
+            <td class="algorithm-flow"  data-algorithm-name="insertion">
+                <ul>
+
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="selection">
+                <ul>
+
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="bubble">
+                <ul>
+
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="merge">
+                <ul>
+
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="quick">
+                <ul>
+
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow" data-algorithm-name="heap">
+                <ul>
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="shell">
+                <ul>
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+          </tr>
+          <tr id="reversed" >
+            <td> <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Reversed </a> </td>
+            <td class="algorithm-flow"  data-algorithm-name="insertion">
+                <ul>
+
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="selection">
+                <ul>
+
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="bubble">
+                <ul>
+
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="merge">
+                <ul>
+
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="quick">
+                <ul>
+
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow" data-algorithm-name="heap">
+                <ul>
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="shell">
+                <ul>
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+          </tr>
+          <tr id="few-unique">
+            <td> <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Few Unique </a> </td>
+            <td class="algorithm-flow"  data-algorithm-name="insertion">
+                <ul>
+
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="selection">
+                <ul>
+
+                </ul>
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="bubble">
+                <ul>
+
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="merge">
+                <ul>
+
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="quick">
+                <ul>
+
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow" data-algorithm-name="heap">
+                <ul>
+                </ul>
+
+                <a class="start btn btn-primary" href="#">Start!</a>
+            </td>
+            <td class="algorithm-flow"  data-algorithm-name="shell">
+                <ul>
+                </ul>
                 <a class="start btn btn-primary" href="#">Start!</a>
             </td>
           </tr>
@@ -188,9 +282,7 @@
     </div> <!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
     <script src="js/sort.js"></script>

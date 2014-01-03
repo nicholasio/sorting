@@ -22,17 +22,18 @@
 			}
 
 			
-			if ( count == self.arrSteps.length ) {
+			if ( ! self.arrSteps.length || count == self.arrSteps.length ) {
 				self.$flow.find('ul li span').css('background', 'black');
 				clearTimeout(timeOutId);
 				if ( typeof fnCallback === 'function' ) fnCallback();
 
 			}else {
-				setTimeout(animate, 100);	
+				setTimeout(animate, 50);	
 			} 
 			
-
 		},0);
+
+		return timeOutId;
 	}
 
 	Animate.prototype.swapsAnimation = function(count) {
@@ -83,6 +84,7 @@
 		var $elem = $($el[_step.pos]);
 		$elem.addClass('current');
 		$elem.find('span').css('background', 'black');
+		
 		var maximumValue = $flow.data('maximum-value');
 		var percent = ( _step.value / maximumValue ) * 100;
 

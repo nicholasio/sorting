@@ -7,7 +7,7 @@
 	};
 
 	/*
-		Salva a troca para a animação futura
+		Para animações em que só ocorrem trocas
 	*/
 	Sort.prototype.setSwap = function( pos_ini, pos_final, ordenado, unidirecional ) {
 		this.arrSwaps.push( {'pos_ini' : pos_ini, 'pos_final' : pos_final, 'ordenado' : ordenado, 'unidirecional' : unidirecional} );
@@ -21,7 +21,7 @@
 		return this.arr;
 	}
 	/*
-		Para algoritmos de divisão e conquista
+		Para animações tipo set Value (geralmente algoritmos que usam memória auxiliar)
 	*/
 	Sort.prototype.setValue = function( pos, value ) {
 		this.arrValues.push( { 'pos' : pos, 'value' : value } );
@@ -41,10 +41,10 @@
 				break;
 		}
 	}
-	/*
-		Realiza a troca
-	*/
 
+	/*
+		Realiza a troca de dois elementos do vetor
+	*/
 	Sort.prototype.swap = function( a, b ){
 		var aux = this.arr[a];
 		this.arr[a] = this.arr[b];
@@ -221,4 +221,25 @@
 		return 'swaps';
 	}
 
+	/*
+		Shell Sort
+	*/
+	Sort.prototype.shell = function() {
+		 var i, temp, flag = 1;
+	     var d = this.arr.length;
+
+	     while( flag || (d > 1)) {                    // boolean flag (true when not equal to 0)
+	          flag = 0;                               // reset flag to 0 to check for future swaps
+	          d = (d+1) / 2;
+	          for (i = 0; i < (this.arr.length - d); i++) {
+	               if (this.arr[i + d] < this.arr[i]) {
+	               		this.swap(i+d,i);
+	               		this.setSwap(i+d, i, true);
+	                    flag = 1;                  // tells swap has occurred
+	               }
+	          }
+	     }
+	     return 'swaps';
+
+	}
 })();
