@@ -1,9 +1,10 @@
 ;(function($){
 
-	window.Animate = Animate = function(flow, arrSteps, type) {
+	window.Animate = Animate = function(flow, arrSteps, type, mainObj ) {
 		this.$flow = flow;
 		this.arrSteps = arrSteps;
 		this._type = type;
+		this.mainObj = mainObj;
 	}
 
 	Animate.prototype.start = function( fnCallback ) {
@@ -11,7 +12,10 @@
 		var count = 0;
 		var end = false;
 
-		var timeOutId = setTimeout(function animate() {
+		//Só precisamos guardar o id do setTimeout atual
+		var pos = self.mainObj.currentsAnimations.length;
+
+		self.mainObj.currentsAnimations[pos] = setTimeout(function animate() {
 			switch(self._type) {
 				case 'swaps' : 
 					count = self.swapsAnimation.call(self, count);
@@ -24,16 +28,15 @@
 			
 			if ( ! self.arrSteps.length || count == self.arrSteps.length ) {
 				self.$flow.find('ul li span').css('background', 'black');
-				clearTimeout(timeOutId);
+				clearTimeout(self.mainObj.currentsAnimations[pos]);
 				if ( typeof fnCallback === 'function' ) fnCallback();
 
 			}else {
-				setTimeout(animate, 50);	
+				self.mainObj.currentsAnimations[pos] = setTimeout(animate, 50);
 			} 
 			
 		},0);
 
-		return timeOutId;
 	}
 
 	Animate.prototype.swapsAnimation = function(count) {
@@ -84,7 +87,7 @@
 		var $elem = $($el[_step.pos]);
 		$elem.addClass('current');
 		$elem.find('span').css('background', 'black');
-		
+
 		var maximumValue = $flow.data('maximum-value');
 		var percent = ( _step.value / maximumValue ) * 100;
 

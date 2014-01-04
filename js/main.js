@@ -11,7 +11,7 @@
 						  'few-unique' : [40,10,20,30,50,40,20,50,30,10,50,30,20,40,10]
 					    },
 
-		currentAnimation : [ ],
+		currentsAnimations : [ ],
 
 		init : function () {
 			var self = this;
@@ -89,6 +89,8 @@
 				$this.find('span').css("width", percent + "%");
 			});
 
+			this.resetBtn.apply($flow.find('> a'));
+
 		},
 
 		startEvent : function() {
@@ -109,40 +111,71 @@
 
 				var steps = sort.get(typeAnimation);
 				//console.log(sort.getArr());
-				var Anim = new Animate($this.parent() , steps, typeAnimation);
+				var Anim = new Animate($this.parent() , steps, typeAnimation, self);
 
-				Anim.start(function(){
-					$this.removeClass('btn-success').addClass('btn-primary');
-					$this.html("Start");
-				});
+				/* 
+					Passando função de callback resetBtn com o contexto do botão
+					Para isso é necessário retornar uma função callback que execute a função de reset
+					no contexto correto, note que o código return self.resetBtn.apply($this) executaria a função
+					e retornaria um possível valor de retorno.
+				*/
+				Anim.start(
+					(function(){
+						return function(){
+							self.resetBtn.apply($this);	
+						}
+					})()
+				);
 
 				return false;
 			});
 
-			$('.all').click(function() {
-				//self.stopCurrentAnimation();
-				//self.setFlows();
+			var $all 		= $('.all');
+			var $sortRow 	= $('.sort-row');
+			var $reset 		= $('.reset');
+			var $sortCol 	= $('.sort-col');
+
+			$all.click(function() {
+				self.stopCurrentsAnimations();
+				self.setFlows();
 				$('.start').click();
 				return false;
 			});
 
-			$('.sort-row').click(function(){
-				//self.stopCurrentAnimation();
-				//self.setFlows();
+			$sortRow.click(function(){
+				$reset.click();
+
 				$(this).parent().parent().find('.start').click();
 			});
-			$('.reset-row').click(function() {
-				self.setFlows();
 
+			$reset.click(function() {
+				self.stopCurrentsAnimations();	
+				self.setFlows();
+			});
+
+			$sortCol.click(function() {
+				$reset.click();
+
+				var cellIndex = $(this).parent()[0].cellIndex;
+				var $table = $(this).parent().parent().parent();
+
+				$table.find('tr:not(:first-child) td:nth-child('+ (cellIndex + 1)+') > .start').click();
+				
 			});
 		},
 
-		stopCurrentAnimation : function() {
-			for(var i = 0; i < this.currentAnimation.length; i++ ){
-				clearTimeout(this.currentAnimation[i]);
+		resetBtn : function( ) {
+			this.removeClass('btn-success').addClass('btn-primary');
+			this.html("Start");
+		},
+
+		stopCurrentsAnimations : function() {
+			for(var i = 0; i < this.currentsAnimations.length; i++ ){
+				clearTimeout(this.currentsAnimations[i]);
 			}
 				
 		},
+
 		_getSetName : function($flow) {
 			var setName = $flow.attr('id');
 			var algorithmName = $flow.data('algorithm-name');

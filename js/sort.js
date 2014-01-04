@@ -193,7 +193,7 @@
 	            this.swap(pai, filho);
 	            this.setSwap(filho,pai, true);
 	            this._descer(filho, n);
-	        }
+	        } else this.setSwap(pai, pai);
 	    }
 	}
 

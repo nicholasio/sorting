@@ -14,4 +14,16 @@ Como usar?
 =======
 O framework e o site em si ainda estão em processo de implementação, dessa forma muita coisa pode mudar ainda, por enquanto a opção é se aventurar pelos códigos para entendê-lo.
 
+Navegadores Suportados
+=======
+Os seguintes navegadores são suportados, é possível que alguns navegadores e/ou versões mais antigas funcionem corretamente, porém não foram testadas.
+
+* Firefox 3.6+
+* Chrome 14+
+* Safari 4+
+* IE 8+
+* Opera 10.6+
+
+
+
 
