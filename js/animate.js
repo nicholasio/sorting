@@ -54,7 +54,7 @@
 		$next.parent().addClass('current');
 
 		if ( _swap.ordenado ) { //Indica que o elemente neste índice já está na sua posição
-			var $elem = $($el[_swap.pos_ini]);
+			var $elem = $($el[_swap.pos_final]);
 			$elem.find('span').css("background", "black");
 		}
 

@@ -5,24 +5,86 @@
 
 		arrValues : {  },
 
-		defaultValues : { 'random' : [1,90, 50,40,43,85,53,12,46,54,20,5,23,40], 
-						  'nearly-sorted' : [20,20,10,10,30,30,40,50,60,60,70,70,80,80,90,90],
-						  'reversed' : [100,90,80,70,60,50,40,30,20,10,5,1],
-						  'few-unique' : [40,10,20,30,50,40,20,50,30,10,50,30,20,40,10]
+		defaultValues : { 'random' 			: [1,90, 50,40,43,85,53,12,46,54,20,5,23,40,45], 
+						  'nearly-sorted' 	: [20,20,10,10,30,30,40,50,60,60,70,70,80,80,90],
+						  'reversed' 		: [100,90,80,70,60,50,40,30,20,10,9,8,7,5,1],
+						  'few-unique'		: [40,10,20,30,50,40,20,50,30,10,50,30,20,40,10]
 					    },
 
 		currentsAnimations : [ ],
 
+		customValues : { },
+
 		init : function () {
 			var self = this;
-
-			//Set os fluxos para os valores padrões
+			//Seta os fluxos para os valores padrões
 			this.setFlows();
 
 			//Escute os eventos de início
 			this.startEvent();
+
+			this.$algorithmFlow.on('click', $.proxy( this.setCustomFlow, this) );
+			this.$algorithmFlow.on('evt.setFlow', this.evtSetFlow );
+			
+		},
+		setCustomFlow : function(evt, $flows) {
+			var self = this;
+			var $currentFlow;
+
+			if ( evt === null ) {
+				$currentFlow = $flows
+			} else {
+				$currentFlow = $(evt.currentTarget);
+			}
 			
 
+			var values = [];
+			$( "#dialog-message" ).dialog({
+				modal: true,
+				width: 300,
+				buttons: {
+					Ok: function() {
+						var $textarea = $(this).find("textarea");
+
+						if ( $textarea.val().length == 0 ) {
+							$(this).dialog( "close" );
+							return;	
+						}
+						self.stopCurrentsAnimations();
+						values = $textarea.val().split(',');
+
+						$.each($currentFlow, function() {
+							var _idFlow = $(this).attr('id');
+
+							if (typeof self.customValues[_idFlow] === 'undefined' ) 
+								self.customValues[_idFlow] = [];
+
+							self.customValues[_idFlow] = values;
+
+							$(this).trigger('evt.setFlow', [ values, self ]);
+						});
+						
+						$textarea.val("");
+
+						$( this ).dialog( "close" );
+					},
+					Cancel : function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+
+			
+		},
+		evtSetFlow : function(evt, values, self) {
+			self.setFlow($(this), values);
+		},
+		getSet : function(_idFlow, _set){
+
+			if ( typeof this.customValues[_idFlow] !== 'undefined' && this.customValues[_idFlow].length > 0)
+				return this.customValues[_idFlow];
+
+			return this.defaultValues[_set];
 		},
 		setFlows : function() {
 			var self = this;
@@ -32,11 +94,13 @@
 				//Pega o container (tr) do conjunto de fluxos de execução, com exceção do primeiro td
 				var $flows = $('#' + _set ).find('td:not(:first-child)'); 
 
-				$.each( $flows, function(index) {
+				$.each( $flows, function( index ) {
 					var algorithmName = $(this).data('algorithm-name');
-					$(this).attr('id',_set + '-' + algorithmName);
+					var _idFlow = _set + '-' + algorithmName;
 
-					self.setFlow( $(this), set );
+					$(this).attr('id', _idFlow);
+
+					self.setFlow( $(this), self.getSet(_idFlow, _set) );
 				});
 			}
 		},
@@ -95,11 +159,20 @@
 
 		startEvent : function() {
 			var self = this;
+			var $all 		= $('.all');
+			var $sortRow 	= $('.sort-row');
+			var $reset 		= $('.reset');
+			var $sortCol 	= $('.sort-col');
+			var $setRow     = $('.set-row');
+			var $setCol  	= $('.set-col');
+			var $resetAll   = $('.reset-all');
 
 			$('.start').click(function(evt){
+
 				var $this = $(this);
 				$this.html('...');
 				$this.removeClass('btn-primary').addClass('btn-success');
+				
 
 				var $flow = $this.parent();
 				var algorithmName = $flow.data('algorithm-name');
@@ -110,7 +183,7 @@
 				var typeAnimation = sort[algorithmName](); //equivalente a sort.method();
 
 				var steps = sort.get(typeAnimation);
-				//console.log(sort.getArr());
+
 				var Anim = new Animate($this.parent() , steps, typeAnimation, self);
 
 				/* 
@@ -130,11 +203,6 @@
 				return false;
 			});
 
-			var $all 		= $('.all');
-			var $sortRow 	= $('.sort-row');
-			var $reset 		= $('.reset');
-			var $sortCol 	= $('.sort-col');
-
 			$all.click(function() {
 				self.stopCurrentsAnimations();
 				self.setFlows();
@@ -143,18 +211,19 @@
 			});
 
 			$sortRow.click(function(){
-				$reset.click();
+				$resetAll.click();
 
 				$(this).parent().parent().find('.start').click();
 			});
 
 			$reset.click(function() {
+				self.customValues = {};
 				self.stopCurrentsAnimations();	
 				self.setFlows();
 			});
 
 			$sortCol.click(function() {
-				$reset.click();
+				$resetAll.click();
 
 				var cellIndex = $(this).parent()[0].cellIndex;
 				var $table = $(this).parent().parent().parent();
@@ -162,11 +231,30 @@
 				$table.find('tr:not(:first-child) td:nth-child('+ (cellIndex + 1)+') > .start').click();
 				
 			});
+
+			$setRow.click(function() {
+				var $flows = $(this).parent().parent().find('.algorithm-flow');
+				self.setCustomFlow( null, $flows)
+			});
+
+			$setCol.click(function(){
+				var cellIndex = $(this).parent()[0].cellIndex;
+				var $table = $(this).parent().parent().parent();
+
+				var $flows = $table.find('tr:not(:first-child) td:nth-child('+ (cellIndex + 1)+')');
+				self.setCustomFlow(null, $flows);
+			});
+
+			$resetAll.click(function() {
+				self.stopCurrentsAnimations();	
+				self.setFlows();
+			});
 		},
 
 		resetBtn : function( ) {
 			this.removeClass('btn-success').addClass('btn-primary');
 			this.html("Start");
+			this.addClass('start');
 		},
 
 		stopCurrentsAnimations : function() {

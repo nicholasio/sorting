@@ -7,9 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simulação de execução de algoritmos de ordenação</title>
+    <title>Simulação de Algoritmos de Ordenação</title>
 
     <link href="dist/css/bootstrap.css" rel="stylesheet">
+    <link href="css/jquery.ui.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
 
@@ -25,7 +26,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Sorting Algorithms Simulation</a>
+          <a class="navbar-brand" href="#">Simulação de Algoritmos de Ordenação</a>
         </div>
 
       </div>
@@ -37,6 +38,12 @@
         <h1>Algoritmos de Ordenação</h1>
         <p>Basta clicar em <em>start</em> para executar algum algoritmo, ou simplesmente clique em <em> Executar Todos</em> para ver todos eles serem executados simultâneamente. </p>
         <p>
+            É possível definir conjunto de valores customizados de três formas: individuais, por linha ou por coluna. Para definir conjunto de valores
+            individuas, basta clicar sobre uma célula específica. Para definir por linha ou por coluna, clique sobre o ícone correspondente à linha/coluna.
+        </p>
+
+        <p>Gostou? Veja o código no <a href="http://github.com/nicholasio/sorting">Github</a>.</p>
+        <p>
           <a class="btn btn-primary btn-lg all" role="button">Executar todos</a> 
           <a class="btn btn-warning reset btn-lg"><i class="glyphicon glyphicon-repeat"></i> Reset</a>
         </p>
@@ -44,34 +51,44 @@
     </div>
 
     <div class="container">
-      <!-- Example row of columns -->
+
       <div class="row">
         <table class="table table-condesed">
           <tr>
-            <th></th>
+            <th>
+                <a class="btn btn-warning reset-all"><i class="glyphicon glyphicon-repeat"></i></a> 
+            </th>
             <th> 
               <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"> </i> Insertion</a>
+              <a class="btn btn-primary set-col"><i class="glyphicon glyphicon-pencil"></i></a> 
             </th>
             <th> 
               <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"> </i> Selection</a>
+              <a class="btn btn-primary set-col"><i class="glyphicon glyphicon-pencil"></i></a> 
             </th>
             <th> 
               <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"></i> Bubble</a>
+              <a class="btn btn-primary set-col"><i class="glyphicon glyphicon-pencil"></i></a> 
             </th>
             <th> 
-              <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"></i>Merge</a>
+              <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"></i> Merge</a>
+              <a class="btn btn-primary set-col"><i class="glyphicon glyphicon-pencil"></i></a> 
             </th>
             <th> 
-              <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"></i>Quick</a>
+              <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"></i> Quick</a>
+              <a class="btn btn-primary set-col"><i class="glyphicon glyphicon-pencil"></i></a> 
             </th>
             <th> 
-              <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"></i>Heap</a>
+              <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"></i> Heap</a>
+              <a class="btn btn-primary set-col"><i class="glyphicon glyphicon-pencil"></i></a> 
             </th>
             <th> 
-              <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"> </i>Shell</a>
+              <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"> </i> Shell</a>
+              <a class="btn btn-primary set-col"><i class="glyphicon glyphicon-pencil"></i></a> 
             </th>
             <th>
               <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"></i> Counting</a>
+
             </th>
             <th>
               <a class="btn btn-info sort-col"><i class="glyphicon glyphicon-repeat"></i> Radix</a>
@@ -81,6 +98,7 @@
           <tr id="random" >
             <td> 
               <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Random</a> 
+              <a class="btn btn-primary set-row"><i class="glyphicon glyphicon-pencil"></i></a> 
             </td>
             <td class="algorithm-flow"  data-algorithm-name="insertion">
                 <ul>
@@ -128,8 +146,11 @@
             </td>
           </tr>
 
-          <tr id="nearly-sorted" >
-            <td> <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Nearly Sorted </a> </td>
+          <tr id="nearly-sorted">
+            <td>
+             <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Nearly Sorted </a>
+             <a class="btn btn-primary set-row"><i class="glyphicon glyphicon-pencil"></i></a> 
+            </td>
             <td class="algorithm-flow"  data-algorithm-name="insertion">
                 <ul>
 
@@ -176,7 +197,10 @@
             </td>
           </tr>
           <tr id="reversed" >
-            <td> <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Reversed </a> </td>
+            <td> 
+                <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Reversed </a> 
+                <a class="btn btn-primary set-row"><i class="glyphicon glyphicon-pencil"></i></a> 
+            </td>
             <td class="algorithm-flow"  data-algorithm-name="insertion">
                 <ul>
 
@@ -223,7 +247,10 @@
             </td>
           </tr>
           <tr id="few-unique">
-            <td> <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Few Unique </a> </td>
+            <td> 
+                <a class="btn btn-info sort-row"><i class="glyphicon glyphicon-repeat"></i> Few Unique </a>
+                <a class="btn btn-primary set-row"><i class="glyphicon glyphicon-pencil"></i></a> 
+            </td>
             <td class="algorithm-flow"  data-algorithm-name="insertion">
                 <ul>
 
@@ -275,16 +302,25 @@
       </div>
 
       <hr>
-
+    <div id="dialog-message" style="display:none" title="Valores Customizados">
+        <p>
+            <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+           Insira os valores separados por ','
+        </p>
+        <textarea></textarea>
+        </div>
       <footer>
         <p>&copy; <img width="16px" src="img/brazil_flag.png" />  2014 </p>
       </footer>
     </div> <!-- /container -->
 
 
-
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- Bibliotecas externas -->
+    <script src="js/jquery.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
+    <script src="js/jquery.ui.js"></script>
+
+    <!-- Javacript interno -->
     <script src="js/sort.js"></script>
     <script src="js/animate.js"></script>
     <script src="js/main.js"></script>

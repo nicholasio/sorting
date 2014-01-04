@@ -56,15 +56,18 @@
 		for( var i = 0; i < this.arr.length - 1; i++) {
 			var j = 0
 			for (; j < this.arr.length - i - 1; j++) {
-
+				flag = false;
+				if ( j == this.arr.length - i - 2) {
+					flag = true;
+				}
 				if ( this.arr[j] > this.arr[j+1] ) {
-					this.setSwap(j, j+1, false);
+					this.setSwap(j, j+1, flag);
 					this.swap(j, j+1);
-				} else { this.setSwap(j, j, false); }
+				} else { this.setSwap(j, j, flag); }
 			}
-			this.setSwap(j,j, true); //Elemento está ordenado
+			//this.setSwap(j,j, true); //Elemento está ordenado
 		}
-		this.setSwap(0, 0, true); //Marcando o primeiro
+		//this.setSwap(0, 0, true); //Marcando o primeiro
 
 		return 'swaps';
 
@@ -76,9 +79,16 @@
 
 		for (var i = 1 ; i <= this.arr.length - 1; i++) {
 			var j = i;
-		    while ( j > 0 && this.arr[j] < this.arr[j-1]) {
-		    	this.setSwap(j, j-1, false);
-		    	this.swap(j, j-1);
+		    while ( j > 0 ) {
+		    	if ( this.arr[j] < this.arr[j-1] ) {
+		    		this.setSwap(j, j-1, true);
+		    		this.swap(j, j-1);
+
+		    	} else {
+		    		this.setSwap(j,j, false);
+		    		break;
+		    	}
+
 		    	j--;
 		    }
 		}
@@ -116,6 +126,7 @@
 		while (i < q) {
 			w[k++] = this.arr[i++];
 		}
+
 		while (j < r){
 			w[k++] = this.arr[j++];	
 		}
@@ -153,7 +164,7 @@
 				this.swap(j,k);
 				this.setSwap(j,k);
 				j++;
-			}
+			} else { this.setSwap(k,k,false); }
 		}
 		this.setSwap(r,j,true);
 		this.swap(r,j,true);
