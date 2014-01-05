@@ -5,6 +5,8 @@
 		this.arrSteps = arrSteps;
 		this._type = type;
 		this.mainObj = mainObj;
+		this.$elementsBar = null;
+		this.$elements = null;
 	}
 
 	Animate.prototype.start = function( fnCallback ) {
@@ -14,6 +16,9 @@
 
 		//Só precisamos guardar o id do setTimeout atual
 		var pos = self.mainObj.currentsAnimations.length;
+
+		this.$elements = this.$flow.find('ul li');
+		this.$elementsBar    = this.$elements.find('span');
 
 		self.mainObj.currentsAnimations[pos] = setTimeout(function animate() {
 			switch(self._type) {
@@ -27,11 +32,11 @@
 
 			
 			if ( ! self.arrSteps.length || count == self.arrSteps.length ) {
-				self.$flow.find('ul li span').css('background', 'black');
+				self.$elementsBar.css('background', 'black');
 				clearTimeout(self.mainObj.currentsAnimations[pos]);
 				if ( typeof fnCallback === 'function' ) fnCallback();
 
-			}else {
+			} else {
 				self.mainObj.currentsAnimations[pos] = setTimeout(animate, 50);
 			} 
 			
@@ -41,21 +46,21 @@
 
 	Animate.prototype.swapsAnimation = function(count) {
 		var $flow = this.$flow;
-		var $el = $flow.find('ul li');
-		$el.removeClass('current');
+		var $el = this.$elementsBar;
+
+		this.$elements.removeClass('current');
 
 		var _swap = this.arrSteps[count++];
 
 		if ( typeof _swap === 'undefined' ) return;
 
-		var $actual = $($el[_swap.pos_ini]).find('span');
-		var $next = $($el[_swap.pos_final]).find('span');
+		var $actual = $($el[_swap.pos_ini]);
+		var $next = $($el[_swap.pos_final]);
 
 		$next.parent().addClass('current');
 
 		if ( _swap.ordenado ) { //Indica que o elemente neste índice já está na sua posição
-			var $elem = $($el[_swap.pos_final]);
-			$elem.find('span').css("background", "black");
+			$next.css("background", "black");
 		}
 
 		if ( _swap.pos_ini != _swap.pos_final ) {
@@ -77,22 +82,23 @@
 
 	Animate.prototype.conquestAnimation = function(count) {
 		var $flow = this.$flow;
-		var $el = $flow.find('ul li');
-		$el.removeClass('current');
+		var $el = this.$elementsBar;
+
+		this.$elements.removeClass('current');
 
 		var _step = this.arrSteps[count++];
 
 		if ( typeof _step === 'undefined' ) return;
 
 		var $elem = $($el[_step.pos]);
-		$elem.addClass('current');
-		$elem.find('span').css('background', 'black');
+		$elem.parent().addClass('current');
+		$elem.css('background', 'black');
 
 		var maximumValue = $flow.data('maximum-value');
 		var percent = ( _step.value / maximumValue ) * 100;
 
-		$elem.find('span').css("width", percent + "%");
-		$elem.find('span').data('value', _step.value);
+		$elem.css("width", percent + "%");
+		$elem.data('value', _step.value);
 
 
 		return count;
