@@ -43,3 +43,4 @@ table tr th { text-align: center; }
 .algorithm-flow a { float:left; clear:left; margin-left: 20%; margin-top: 10px; }
 
 .set-row, .set-col, .reset-col, .reset-row{ margin-top: 20px; }
+.sort-row, .set-row { float:left; clear:left; }
