@@ -204,7 +204,7 @@
 					(function(){
 						return function(){
 							diff = new Date().getTime() - start;
-							$this.parent().find('.time').html("*Tempo: " + diff/1000 + "s");
+							//$this.parent().find('.time').html("*Tempo: " + diff/1000 + "s");
 							self.resetBtn.apply($this);	
 						}
 					})()
