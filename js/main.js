@@ -199,7 +199,7 @@
 
 				var start, diff;
 				start = new Date().getTime();
-				console.log(start);
+
 				Anim.start(
 					(function(){
 						return function(){

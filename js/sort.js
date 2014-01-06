@@ -241,12 +241,14 @@
 
 	     while( flag || (d > 1)) {                    // boolean flag (true when not equal to 0)
 	          flag = 0;                               // reset flag to 0 to check for future swaps
-	          d = (d+1) / 2;
+	          d = parseInt( (d+1) / 2 );
 	          for (i = 0; i < (this.arr.length - d); i++) {
 	               if (this.arr[i + d] < this.arr[i]) {
 	               		this.swap(i+d,i);
 	               		this.setSwap(i+d, i, true);
 	                    flag = 1;                  // tells swap has occurred
+	               } else {
+	               	this.setSwap(i+d, i+d, false);
 	               }
 	          }
 	     }
