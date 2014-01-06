@@ -127,7 +127,7 @@
 			var maximumValue = $flow.data('maximum-value');
 
 			var $li = $flow.find('> ul > li');
-
+			$flow.find('.time').html("");
 			var algorithmName = $flow.data('algorithm-name');
 
 			var setName = this._getSetName($flow);
@@ -172,7 +172,7 @@
 				var $this = $(this);
 				$this.html('...');
 				$this.removeClass('btn-primary').addClass('btn-success');
-				
+					
 
 				var $flow = $this.parent();
 				var algorithmName = $flow.data('algorithm-name');
@@ -180,7 +180,11 @@
 				var setName = self._getSetName($flow);
 
 				var sort = new Sort(self.arrValues[algorithmName][setName]); // self.arrValues.method
+
+
 				var typeAnimation = sort[algorithmName](); //equivalente a sort.method();
+
+
 
 				var steps = sort.get(typeAnimation);
 
@@ -192,9 +196,15 @@
 					no contexto correto, note que o código return self.resetBtn.apply($this) executaria a função
 					e retornaria um possível valor de retorno.
 				*/
+
+				var start, diff;
+				start = new Date().getTime();
+				console.log(start);
 				Anim.start(
 					(function(){
 						return function(){
+							diff = new Date().getTime() - start;
+							$this.parent().find('.time').html("*Tempo: " + diff/1000 + "s");
 							self.resetBtn.apply($this);	
 						}
 					})()

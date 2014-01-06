@@ -44,3 +44,5 @@ table tr th { text-align: center; }
 
 .set-row, .set-col, .reset-col, .reset-row{ margin-top: 20px; }
 .sort-row, .set-row { float:left; clear:left; }
+
+.time { font-size: 12px; }
