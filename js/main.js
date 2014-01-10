@@ -168,8 +168,9 @@
 			var $resetAll   = $('.reset-all');
 
 			var $start 		= $('.start');
-
-			$start.click(function(evt, max, obj){
+			var $startAnim = $('.start-anim');
+			
+			$start.click(function(evt, start){
 
 				var $this = $(this);
 				$this.html('...');
@@ -211,16 +212,16 @@
 
                 addAnimation(Anim);
 
-               /*if (  typeof max === 'undefined' || ++(obj.count) == max  ) {
+               if (  typeof start === 'undefined' ) {
                 	console.log('started');
                 	$start.__count = 0;
                 	startAnimations(self);
-                }*/
+                }
+				
 				return false;
 			});
 
-            $('.start-anim').click(function(){
-                //console.log(window._animations);
+            $startAnim.click(function(){
                 startAnimations(self);    
             });
             
@@ -228,25 +229,30 @@
 			$all.click(function() {
 				self.stopCurrentsAnimations();
 				self.setFlows();
-
-				var allFlows = $start.length;
-				$start.__max = allFlows;
-				$start.click();
+				
+				$start.trigger("click", [false] );
+				$startAnim.click();
+				
 				return false;
 			});
 
 			$sortRow.click(function(){
 				$resetAll.click();
-				var obj = { count : 0 };
+				
 				var $start = $(this).parent().parent().find('.start');
-				$start.trigger('click', [$start.length, obj]);
-				console.log(obj);
+				
+				$start.trigger('click', [false]);
+				$startAnim.click();
+				
+				return false;
 			});
 
 			$reset.click(function() {
 				self.customValues = {};
 				self.stopCurrentsAnimations();	
 				self.setFlows();
+				
+				return false;
 			});
 
 			$sortCol.click(function() {
@@ -256,15 +262,15 @@
 				var $table = $(this).parent().parent().parent();
 
 				var $start = $table.find('tr:not(:first-child) td:nth-child('+ (cellIndex + 1)+') > .start');
-				$start.__max = $start.length;
-				$start.__count = 0;
-				$start.click();
+				$start.trigger("click", [false]);
+				$starAnim.click();
 				
 			});
 
 			$setRow.click(function() {
 				var $flows = $(this).parent().parent().find('.algorithm-flow');
 				self.setCustomFlow( null, $flows)
+				
 			});
 
 			$setCol.click(function(){
