@@ -188,7 +188,18 @@
 
 				var steps = sort.get(typeAnimation);
 
-				var Anim = new Animate($this.parent() , steps, typeAnimation, self);
+                var start, diff;
+				start = new Date().getTime();
+				
+				var Anim = new Animate($this.parent() , steps, 
+				    (function(){
+						return function(){
+							diff = new Date().getTime() - start;
+							$this.parent().find('.time').html("*Tempo: " + diff/1000 + "s");
+							self.resetBtn.apply($this);	
+						}
+					})() ,
+				typeAnimation);
 
 				/* 
 					Passando função de callback resetBtn com o contexto do botão
@@ -197,22 +208,18 @@
 					e retornaria um possível valor de retorno.
 				*/
 
-				var start, diff;
-				start = new Date().getTime();
-
-				Anim.start(
-					(function(){
-						return function(){
-							diff = new Date().getTime() - start;
-							//$this.parent().find('.time').html("*Tempo: " + diff/1000 + "s");
-							self.resetBtn.apply($this);	
-						}
-					})()
-				);
+                addAnimation(Anim);
+                
 
 				return false;
 			});
 
+            $('.start-anim').click(function(){
+                console.log(_animations);
+                startAnimations(self);    
+            });
+            
+            
 			$all.click(function() {
 				self.stopCurrentsAnimations();
 				self.setFlows();

@@ -1,12 +1,67 @@
 ;(function($){
 
-	window.Animate = Animate = function(flow, arrSteps, type, mainObj ) {
+    window._animations = [];
+    
+    window.addAnimation = function( animObj ) {
+        window._animations.push(animObj);
+    }
+    
+    window.startAnimations = function( mainObj ) {
+        var pos = mainObj.currentsAnimations.length;
+        
+        mainObj.currentsAnimations[pos] = setTimeout(function animate(){
+            var hasAnimations = false;
+            for( var i = 0; i < window._animations.length; i++ ) {
+                var currObj = window._animations[i];
+                if ( currObj.count == currObj.arrSteps.length ) {
+                    currObj.fnCallback();
+                } else {
+                    hasAnimations = true;
+                    window.doAnimation(currObj, animate, mainObj, pos);    
+                }
+            }    
+            
+            if ( ! hasAnimations ) {
+                //$elementsBar.css('background', 'black');
+			    clearTimeout(mainObj.currentsAnimations[pos]);
+			    window._animations = [];
+			    if ( typeof currObj.fnCallback === 'function' ) currObj.fnCallback();
+            }   
+            
+        },0);
+
+    }
+    
+    window.doAnimation = function( currObj, fnAnimate, mainObj, pos ) {
+        var $elements, $elementsBar;
+        
+        $elements       = currObj.$flow.find('ul li');
+		$elementsBar    = $elements.find('span');
+		
+		switch(currObj._type) {
+			case 'swaps' : 
+				currObj.swapsAnimation.call(currObj);
+				break;
+			case 'conquest' :
+				currObj.conquestAnimation.call(currObj);
+				break;
+		}
+
+		
+
+		mainObj.currentsAnimations[pos] = setTimeout(fnAnimate, 50);
+		
+    }
+    
+	window.Animate = Animate = function(flow, arrSteps, type, fnCallback, mainObj ) {
 		this.$flow = flow;
 		this.arrSteps = arrSteps;
 		this._type = type;
 		this.mainObj = mainObj;
 		this.$elementsBar = null;
 		this.$elements = null;
+		this.count = 0;
+		this.fnCallback = fnCallback;
 	}
 
 	Animate.prototype.start = function( fnCallback ) {
@@ -50,7 +105,7 @@
 
 		this.$elements.removeClass('current');
 
-		var _swap = this.arrSteps[count++];
+		var _swap = this.arrSteps[this.count++];
 
 		if ( typeof _swap === 'undefined' ) return;
 
@@ -86,7 +141,7 @@
 
 		this.$elements.removeClass('current');
 
-		var _step = this.arrSteps[count++];
+		var _step = this.arrSteps[this.count++];
 
 		if ( typeof _step === 'undefined' ) return;
 
