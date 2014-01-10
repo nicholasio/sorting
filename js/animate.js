@@ -9,24 +9,47 @@
     window.startAnimations = function( mainObj ) {
         var pos = mainObj.currentsAnimations.length;
         
-        mainObj.currentsAnimations[pos] = setTimeout(function animate(){
+        var animId;
+        animId = setTimeout(function animate(){
             var hasAnimations = false;
             for( var i = 0; i < window._animations.length; i++ ) {
                 var currObj = window._animations[i];
-                if ( currObj.count == currObj.arrSteps.length ) {
+                //console.log(currObj.count + '-' + currObj.arrSteps.length);
+                if ( currObj === null ) {
+                	continue;
+                }
+                else if ( currObj.count == currObj.arrSteps.length) {
                     currObj.fnCallback();
+                    currObj.$elementsBar.css('background', 'black');
+                    window._animations[i] = null;
                 } else {
                     hasAnimations = true;
-                    window.doAnimation(currObj, animate, mainObj, pos);    
+                    //window.doAnimation(currObj, animate, mainObj, pos);   
+                    //console.log(currObj);
+                    var $elements, $elementsBar;
+        
+			        currObj.$elements       = currObj.$flow.find('ul li');
+					currObj.$elementsBar    = currObj.$elements.find('span');
+					
+					//console.log(currObj);
+					switch(currObj._type) {
+						case 'swaps' : 
+							//console.log("swap animation done");
+							currObj.swapsAnimation.call(currObj);
+							break;
+						case 'conquest' :
+							//console.log("conquest animation");
+							currObj.conquestAnimation.call(currObj);
+							break;
+					}
                 }
             }    
-            
             if ( ! hasAnimations ) {
-                //$elementsBar.css('background', 'black');
-			    clearTimeout(mainObj.currentsAnimations[pos]);
+			    clearTimeout(animId);
 			    window._animations = [];
-			    if ( typeof currObj.fnCallback === 'function' ) currObj.fnCallback();
-            }   
+            }  else {
+            	animId = setTimeout(animate, 50);
+            }
             
         },0);
 
@@ -35,8 +58,8 @@
     window.doAnimation = function( currObj, fnAnimate, mainObj, pos ) {
         var $elements, $elementsBar;
         
-        $elements       = currObj.$flow.find('ul li');
-		$elementsBar    = $elements.find('span');
+        currObj.$elements       = currObj.$flow.find('ul li');
+		currObj.$elementsBar    = currObj.$elements.find('span');
 		
 		switch(currObj._type) {
 			case 'swaps' : 
@@ -53,11 +76,11 @@
 		
     }
     
-	window.Animate = Animate = function(flow, arrSteps, type, fnCallback, mainObj ) {
+	window.Animate = Animate = function(flow, arrSteps, type, fnCallback ) {
 		this.$flow = flow;
 		this.arrSteps = arrSteps;
 		this._type = type;
-		this.mainObj = mainObj;
+		//this.mainObj = mainObj;
 		this.$elementsBar = null;
 		this.$elements = null;
 		this.count = 0;
@@ -99,7 +122,7 @@
 
 	}
 
-	Animate.prototype.swapsAnimation = function(count) {
+	Animate.prototype.swapsAnimation = function() {
 		var $flow = this.$flow;
 		var $el = this.$elementsBar;
 
@@ -132,10 +155,9 @@
 			}
 		} 
 
-		return count;	
 	}
 
-	Animate.prototype.conquestAnimation = function(count) {
+	Animate.prototype.conquestAnimation = function() {
 		var $flow = this.$flow;
 		var $el = this.$elementsBar;
 
@@ -156,7 +178,6 @@
 		$elem.data('value', _step.value);
 
 
-		return count;
 
 	}
 

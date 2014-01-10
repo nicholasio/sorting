@@ -167,7 +167,9 @@
 			var $setCol  	= $('.set-col');
 			var $resetAll   = $('.reset-all');
 
-			$('.start').click(function(evt){
+			var $start 		= $('.start');
+
+			$start.click(function(evt, max, obj){
 
 				var $this = $(this);
 				$this.html('...');
@@ -190,16 +192,6 @@
 
                 var start, diff;
 				start = new Date().getTime();
-				
-				var Anim = new Animate($this.parent() , steps, 
-				    (function(){
-						return function(){
-							diff = new Date().getTime() - start;
-							$this.parent().find('.time').html("*Tempo: " + diff/1000 + "s");
-							self.resetBtn.apply($this);	
-						}
-					})() ,
-				typeAnimation);
 
 				/* 
 					Passando função de callback resetBtn com o contexto do botão
@@ -207,15 +199,28 @@
 					no contexto correto, note que o código return self.resetBtn.apply($this) executaria a função
 					e retornaria um possível valor de retorno.
 				*/
+				var Anim = new Animate($this.parent() , steps, typeAnimation,
+				    (function(){
+						return function(){
+							diff = new Date().getTime() - start;
+							$this.parent().find('.time').html("*Tempo: " + diff/1000 + "s");
+							self.resetBtn.apply($this);	
+						}
+					})()
+				);
 
                 addAnimation(Anim);
-                
 
+               /*if (  typeof max === 'undefined' || ++(obj.count) == max  ) {
+                	console.log('started');
+                	$start.__count = 0;
+                	startAnimations(self);
+                }*/
 				return false;
 			});
 
             $('.start-anim').click(function(){
-                console.log(_animations);
+                //console.log(window._animations);
                 startAnimations(self);    
             });
             
@@ -223,14 +228,19 @@
 			$all.click(function() {
 				self.stopCurrentsAnimations();
 				self.setFlows();
-				$('.start').click();
+
+				var allFlows = $start.length;
+				$start.__max = allFlows;
+				$start.click();
 				return false;
 			});
 
 			$sortRow.click(function(){
 				$resetAll.click();
-
-				$(this).parent().parent().find('.start').click();
+				var obj = { count : 0 };
+				var $start = $(this).parent().parent().find('.start');
+				$start.trigger('click', [$start.length, obj]);
+				console.log(obj);
 			});
 
 			$reset.click(function() {
@@ -245,7 +255,10 @@
 				var cellIndex = $(this).parent()[0].cellIndex;
 				var $table = $(this).parent().parent().parent();
 
-				$table.find('tr:not(:first-child) td:nth-child('+ (cellIndex + 1)+') > .start').click();
+				var $start = $table.find('tr:not(:first-child) td:nth-child('+ (cellIndex + 1)+') > .start');
+				$start.__max = $start.length;
+				$start.__count = 0;
+				$start.click();
 				
 			});
 
