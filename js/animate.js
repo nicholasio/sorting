@@ -20,6 +20,8 @@
 		this.$elements = this.$flow.find('ul li');
 		this.$elementsBar    = this.$elements.find('span');
 
+		var start, end;
+		start = new Date().getTime();
 		self.mainObj.currentsAnimations[pos] = setTimeout(function animate() {
 			switch(self._type) {
 				case 'swaps' : 
@@ -34,7 +36,8 @@
 			if ( ! self.arrSteps.length || count == self.arrSteps.length ) {
 				self.$elementsBar.css('background', 'black');
 				clearTimeout(self.mainObj.currentsAnimations[pos]);
-				if ( typeof fnCallback === 'function' ) fnCallback();
+				end = new Date().getTime();
+				if ( typeof fnCallback === 'function' ) fnCallback( start, end );
 
 			} else {
 				self.mainObj.currentsAnimations[pos] = setTimeout(animate, 50);

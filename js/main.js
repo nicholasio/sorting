@@ -186,6 +186,7 @@
 
 
 
+				
 				var steps = sort.get(typeAnimation);
 
 				var Anim = new Animate($this.parent() , steps, typeAnimation, self);
@@ -197,14 +198,13 @@
 					e retornaria um possível valor de retorno.
 				*/
 
-				var start, diff;
-				start = new Date().getTime();
-
+				
 				Anim.start(
 					(function(){
-						return function(){
-							diff = new Date().getTime() - start;
-							//$this.parent().find('.time').html("*Tempo: " + diff/1000 + "s");
+						return function( start, end ){
+							//diff = new Date().getTime() - start;
+							var diff = end - start;
+							$this.parent().find('.time').html("*Tempo: " + diff/1000 + "s");
 							self.resetBtn.apply($this);	
 						}
 					})()
