@@ -1,18 +1,14 @@
 Sorting
 =======
 
-Um website e framework javascript para simulação de algoritmos de ordenação
+Um website for Sorting Algorithms Simulation
 
-Como Funciona
+How it Works
 =======
 
-Os Algoritmos de Ordenação estão implementados em js/sort.js, cada algoritmo de ordenação é processado e um vetor de "passos" é gerado, nos algoritmos mais simples como bubble, insertion e selection esse vetor de "passos" contém simplesmente as trocas que são realizadas ao longo da execução do algoritmo, posteriormente é simulado a execução manipulando elementos do DOM.
+To see the animations just click start to execute any algorithm, or you can simply click on Execute All to see all of them execute simultaneously.
+It's possible to define a set of custom values of three forms: individual, by row or by column. To set individual values, just click on cell. If you want to set custom values by row or by column, click on the icon on given row/column.
 
-Este vetor de "passos" é repassado para o algoritmo de animação, o algoritmo de animação simula a execução do algoritmo baseado no vetor de "passos", a simultaneidade das execuções é simulada enfileirando os diversos passos de cada uma das animações, dando a impressão de execução simultânea.
-
-Como usar?
-=======
-O framework e o site em si ainda estão em processo de implementação, dessa forma muita coisa pode mudar ainda, por enquanto a opção é se aventurar pelos códigos para entendê-lo.
 
 Navegadores Suportados
 =======
