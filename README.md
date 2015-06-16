@@ -1,7 +1,7 @@
 Sorting
 =======
 
-Um website for Sorting Algorithms Simulation
+Website for Sorting Algorithms Simulation
 
 How it Works
 =======
