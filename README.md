@@ -10,9 +10,8 @@ To see the animations just click start to execute any algorithm, or you can simp
 It's possible to define a set of custom values of three forms: individual, by row or by column. To set individual values, just click on cell. If you want to set custom values by row or by column, click on the icon on given row/column.
 
 
-Navegadores Suportados
+Supported Browsers
 =======
-Os seguintes navegadores são suportados, é possível que alguns navegadores e/ou versões mais antigas funcionem corretamente, porém não foram testadas.
 
 * Firefox 3.6+
 * Chrome 14+
